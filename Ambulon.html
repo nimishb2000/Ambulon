@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="shortcut icon" href="Images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="CSS/main.css" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Ambulon</title>
+</head>
+
+<body onresize="resize()" onload="resize()">
+    <a name="Home"></a>
+
+    <!--Navbar-->
+    <nav>
+        <div id="navigation-container">
+            <img src="Images/logo.png" alt="Logo" id="logo" onclick="redirect()"><span id="logo-name">Ambulon</span>
+            <a href="#Home"><i class="fa fa-home"></i> Home</a>
+            <a href="#Feedback"><i class="fa fa-comments-o"></i> Feedback</a>
+            <a href="#Contact" style="margin-right: 2vw;"><i class="fa fa-address-book"></i> Contact</a>
+        </div>
+    </nav>
+
+    <!--Page Content-->
+    <main>
+        <div class="heading">
+            <h1>AMBULON</h1>
+            <h3>An application which finds nearest hospitals and ambulances, and predicts accidents using IoT</h3>
+        </div>
+        <div class="content-wrapper">
+            <h2>Introduction</h2>
+            <p>Ambulon is an application which helps save lives of accident victims by calling the nearest available
+                ambulance to the scene of the accident. According to statistics made available by India Today, a
+                trauma-related death occurrs every 1.9 minutes. Also, there were 1 million cases of death due to
+                road
+                accidents. Most of these deaths could have had been prevented if the ambulance arrived on time. Our
+                aim
+                is to reduce the deaths caused by ensuring the victim gets medical attention in the least amount of
+                time.</p>
+        </div>
+        <div class="content-wrapper">
+            <h2>Technology Used and Implementation</h2>
+            <p>Our application works upon Internet of Things (IoT). We are using Raspberry Pi as primary hardware
+                interface.</p>
+            <p>Two sensors, namely Accelerometer and Gyroscope, are being used to get the real-time data. If the
+                sensor
+                reading change drastically and surpass the set threshold, the user gets a notification on his mobile
+                phone. In case the detection was a fault and the user is safe, the user gets two minutes to press a
+                button in order to confirm that he/she is safe and unharmed.</p>
+            <p>If the user manages to press the button in given time, the process gets terminated. In case the user
+                is
+                unable to press the button, a mail is sent to the pre-chosen contacts with the location of the user,
+                informing them that the user has met an accident. Simultaneously, the location is also sent to the
+                nearest available ambulance driver.</p>
+        </div>
+        <div class="content-wrapper">
+            <h2>Application Screenshots</h2>
+            <div class="image">
+                <img src="images/1.png">
+                <img src="images/2.png">
+                <img src="images/3.png">
+                <img src="images/4.png">
+            </div>
+        </div>
+
+        <a name="Feedback"></a>
+        <div>
+            <div class="heading">
+                <h1>Feedback Form</h1>
+                <h3>Enter your details here</h3>
+            </div>
+            <div class="feedback-container">
+                <img src="Images/feedback.jpg" alt="Feedback" class="feedback-image">
+                <div class="feedback-value">
+                    <form>
+                        <table>
+                            <tr>
+                                <td>
+                                    <p>Name</p>
+                                </td>
+                                <td><input type="text" placeholder="Name" id="name" required></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>Phone Number</p>
+                                </td>
+                                <td><input type="tel" placeholder="Phone Number" id="number" pattern="[0-9]{10}"
+                                        required>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>E-mail</p>
+                                </td>
+                                <td><input type="email" placeholder="E-mail" id="email" required></td>
+                            </tr>
+                            <tr>
+                                <td valign="top">
+                                    <p>Feedback</p>
+                                </td>
+                                <td><textarea cols="30" rows="10" id="feedback" placeholder="Enter feedback here"
+                                        style="font-size: 1em;" required></textarea></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td><button type="button" class="btn" onclick="mail()">Submit</button></td>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <a name="Contact"></a>
+        <div>
+            <div class="heading">
+                <h1>Contact Us</h1>
+                <h3>For any further queries, feel free to contact us</h3>
+            </div>
+            <div class="contact-value">
+                <div class="contact-details">
+                    <p>Rishabh Singh</p>
+                    <p>8077735036</p>
+                    <p>rishabh131199@gmail.com</p>
+                </div>
+                <div class="contact-details">
+                    <p>Rishabh Sharma</p>
+                    <p>8802173105</p>
+                    <p>rishabhsharma2304@gmail.com</p>
+                </div>
+                <div class="contact-details-lower">
+                    <p>Tarun Raghav</p>
+                    <p>9999320268</p>
+                    <p>iamtarunraghav@gmail.com</p>
+                </div>
+                <div class="contact-details-lower">
+                    <p>Nimish Bansal</p>
+                    <p>9650953908</p>
+                    <p>nimishb2000@gmail.com</p>
+                </div>
+            </div>
+            <img src="Images/contact.png" alt="Contact Us" class="contact-image">
+        </div>
+    </main>
+    <script>
+        function redirect() {
+            location.assign('Welcome.html');
+        }
+
+        function mail() {
+            const name = document.getElementById('name').value;
+            const number = document.getElementById('number').value;
+            const email = document.getElementById('email').value;
+            const feedback = document.getElementById("feedback").value;
+            const params = `name=${name}&phone=${number}&email=${email}&feedback=${feedback}`;
+            const http = new XMLHttpRequest();
+            const url = "http://localhost:3000/send-mail";
+            http.open('POST', url, true);
+            http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+            http.onreadystatechange = () => {
+                if (http.readyState == 4 && http.status == 200) {
+                    console.log(http.responseText);
+                    setTimeout(function () {
+                        location.assign('Home.html');
+                    }, 1000);
+                }
+                else {
+                    console.log(http.responseText);
+                }
+            }
+            http.send(params);
+        }
+
+        function resize() {
+            const img = document.getElementById('logo');
+            const name = document.getElementById('logo-name');
+            name.style.left = img.width + 15 + "px";
+            console.log(name.style.left);
+        };
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="shortcut icon" href="Images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="CSS/welcome.css" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Ambulon</title>
+</head>
+
+<body>
+
+    <!--Navbar-->
+    <nav>
+        <div id="navigation-container">
+            <img src="Images/logo.png" alt="Logo" class="logo">
+            <a href="Ambulon.html"><i class="fa fa-home"></i> Home</a>
+            <a href="Ambulon.html#Feedback"><i class="fa fa-comments-o"></i> Feedback</a>
+            <a href="Ambulon.html#Contact" style="margin-right: 2vw;"><i class="fa fa-address-book"></i> Contact</a>
+        </div>
+    </nav>
+
+    <!--Page Content-->
+    <main>
+        <div class="wrapper">
+            <h1>Ambulon</h1>
+            <h1>A Health Care App</h1>
+            <button id="btn" onclick="redirect()" onmouseover="background()" onmouseout="original()">Get Started</button>
+        </div>
+    </main>
+    <script>
+        function redirect() {
+            location.assign('Ambulon.html')
+        }
+
+        function background() {
+            const btn = document.getElementById('btn');
+            btn.style.opacity = 0.5;
+            btn.style.background = "black";
+        }
+
+        function original() {
+            const btn = document.getElementById('btn');
+            btn.style.opacity = 1;
+            btn.style.background = "transparent";    
+        }
+    </script>
+</body>
+
+</html>
